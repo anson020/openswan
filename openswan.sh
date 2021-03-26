@@ -1,9 +1,13 @@
 #!/bin/bash
 yum install openswan lsof -y 
 
-echo 0 > /proc/sys/net/ipv4/conf/eth0/rp_filter
-echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter
-echo 0 > /proc/sys/net/ipv4/conf/ip_vti0/rp_filter
+cat >> /etc/sysctl.conf<<EOF
+net.ipv4.ip_forward = 1
+net.ipv4.conf.default.rp_filter = 0
+net.ipv4.conf.eth0.rp_filter = 0 
+net.ipv4.conf.all.rp_filter = 0
+net.ipv4.conf.ip_vti0.rp_filter = 0
+EOF
 
 sysctl -p
 sysctl -a | egrep "ipv4.*(accept|send)_redirects" | awk -F "=" '{print $1"= 0"}' >> /etc/sysctl.conf
@@ -17,8 +21,7 @@ conn vpn-to-fgt
     auto=start
     ikev2=insist
     ike=aes256-sha256;modp2048  
-    keyexchange=ike
-    aggrmode=yes             
+    keyexchange=ike        
     ikelifetime=86400
 
     ##phase 2##
