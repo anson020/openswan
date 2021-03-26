@@ -4,7 +4,7 @@ yum install openswan lsof -y
 cat >> /etc/sysctl.conf<<EOF
 net.ipv4.ip_forward = 1
 net.ipv4.conf.default.rp_filter = 0
-net.ipv4.conf.eth0.rp_filter = 0 
+net.ipv4.conf.eth0.rp_filter = 0
 net.ipv4.conf.all.rp_filter = 0
 net.ipv4.conf.ip_vti0.rp_filter = 0
 EOF
@@ -20,8 +20,8 @@ conn vpn-to-fgt
     authby=secret
     auto=start
     ikev2=insist
-    ike=aes256-sha256;modp2048  
-    keyexchange=ike        
+    ike=aes256-sha256;modp2048
+    keyexchange=ike
     ikelifetime=86400
 
     ##phase 2##
@@ -43,7 +43,7 @@ conn vpn-to-fgt
 EOF
 
 cat >> /etc/ipsec.secrets<<EOF
-0.0.0.0 0.0.0.0: PSK "hello123" 
+0.0.0.0 0.0.0.0: PSK "hello123"
 EOF
 
 
