@@ -24,6 +24,7 @@ conn vpn-to-fgt
     ike=aes256-sha256;modp2048  
     keyexchange=ike           
     ikelifetime=86400
+    
     ##phase 2##
     phase2=esp
     phase2alg=aes256-sha256
@@ -31,10 +32,12 @@ conn vpn-to-fgt
     pfs=no
     type=tunnel
     keylife=43200
+    
   left=10.0.4.8
   #leftid=@openswan
   leftsubnet=0.0.0.0/0 
   leftnexthop=%defaultroute
+  
   right=0.0.0.0
   rightid=@fgt
   rightsubnet=172.31.6.0/24
