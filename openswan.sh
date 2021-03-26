@@ -3,6 +3,7 @@ yum install openswan lsof -y
 
 echo 0 > /proc/sys/net/ipv4/conf/eth0/rp_filter
 echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter
+echo 0 > /proc/sys/net/ipv4/conf/ip_vti0/rp_filter
 
 sysctl -p
 sysctl -a | egrep "ipv4.*(accept|send)_redirects" | awk -F "=" '{print $1"= 0"}' >> /etc/sysctl.conf
@@ -39,7 +40,7 @@ conn vpn-to-fgt
 EOF
 
 cat >> /etc/ipsec.secrets<<EOF
-0.0.0.0 0.0.0.0: PSK "fancyqube" 
+0.0.0.0 0.0.0.0: PSK "hello123" 
 EOF
 
 
@@ -47,6 +48,7 @@ chmod +x /etc/rc.d/rc.local
 
 cat >> /etc/rc.d/rc.local<<EOF
 iptables --table nat --append POSTROUTING --out-interface eth0 --jump MASQUERADE
+EOF
 
 iptables --table nat --append POSTROUTING --out-interface eth0 --jump MASQUERADE
 service ipsec restart
