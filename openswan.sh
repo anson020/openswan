@@ -17,19 +17,14 @@ chkconfig ipsec on
 
 
 read -p "(eth0ip):"
-echo"lift:$LIFTIP"
 
 read -p "(PSK):"
-echo"PSK:$PSK"
 
 read -p "(RIGHTIP):"
-echo"right:$RIGHTIP"
 
 read -p "(RIGHTID):"
-echo"rightid:$RIGHTID"
 
 read -p "(rightsubnet):"
-echo"rightsubnet:$rightsubnet"
 
 
 cat >> /etc/ipsec.conf<<EOF
