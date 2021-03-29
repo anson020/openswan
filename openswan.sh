@@ -38,7 +38,6 @@ echo"please enter rightsubnet:"
 read -p "(rightsubnet:):"rightsubnet
 [ -z ${rightsubnet} ]
 
-
 echo"lift:${LIFTIP}"
 echo"PSK:${PSK}"
 echo"right:${RIGHTIP}"
