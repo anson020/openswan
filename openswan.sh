@@ -16,23 +16,21 @@ service ipsec restart
 chkconfig ipsec on
 
 
-read -p "(eth0ip:):"liftip
+read -p "(eth0ip):"
 echo"lift:$LIFTIP"
 
-read -p "(PSK:hello123):"PSK
+read -p "(PSK):"
 echo"PSK:$PSK"
 
-read -p "(RIGHTIP:):"RIGHTIP
+read -p "(RIGHTIP):"
 echo"right:$RIGHTIP"
 
-read -p "(RIGHTID:@fgt):"RIGHTID
+read -p "(RIGHTID):"
 echo"rightid:$RIGHTID"
 
-read -p "(rightsubnet:):"rightsubnet
+read -p "(rightsubnet):"
 echo"rightsubnet:$rightsubnet"
- echo
-    echo "Press any key to start... or press Ctrl + C to cancel."
-}
+
 
 cat >> /etc/ipsec.conf<<EOF
 conn vpn-to-fgt
