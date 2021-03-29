@@ -6,9 +6,6 @@ echo $NAME
 read -p "(eth0ip):" LIFTIP
  echo $LIFTIP
 
-read -p "(PSK):" PSK
-echo $PSK
-
 read -p "(RIGHTIP):" RIGHTIP
  echo $RIGHTIP
 
