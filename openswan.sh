@@ -1,6 +1,9 @@
 #!/bin/bash
 yum install openswan lsof -y 
 
+sed -i 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/g' /etc/sysctl.conf
+sed -i 's/net.ipv4.conf.default.rp_filter = 1/net.ipv4.conf.default.rp_filter = 0/g' /etc/sysctl.conf
+
 cat >> /etc/sysctl.conf<<EOF
 net.ipv4.ip_forward = 1
 net.ipv4.conf.default.rp_filter = 0
@@ -21,7 +24,7 @@ read -p "(eth0ip):" LIFTIP
 read -p "(PSK):" PSK
 echo $PSK
 
-read -p "(RIGHTIP):"
+read -p "(RIGHTIP):" RIGHTIP
  echo $RIGHTIP
 
 read -p "(RIGHTID):" RIGHTID
@@ -72,4 +75,4 @@ EOF
 iptables --table nat --append POSTROUTING --out-interface eth0 --jump MASQUERADE
 service ipsec restart
 
-
+ipsec verify
