@@ -52,18 +52,18 @@ conn vpn-to-fgt
     type=tunnel
     keylife=43200
     
-  left=${LIFTIP}
+  left=$LIFTIP
   #leftid=@openswan
   leftsubnet=0.0.0.0/0 
   leftnexthop=%defaultroute
   
-  right=${RIGHTIP}
-  rightid=${RIGHTID}
-  rightsubnet=${rightsubnet}
+  right=$RIGHTIP
+  rightid=$RIGHTID
+  rightsubnet=$rightsubnet
 EOF
 
 cat >> /etc/ipsec.secrets<<EOF
-0.0.0.0 0.0.0.0: PSK "${PSK}" 
+0.0.0.0 0.0.0.0: PSK "$PSK" 
 EOF
 
 
