@@ -15,46 +15,21 @@ sysctl -a | egrep "ipv4.*(accept|send)_redirects" | awk -F "=" '{print $1"= 0"}'
 service ipsec restart
 chkconfig ipsec on
 
-preinstall_ipsec(){
 
-echo
-if [ -d "/proc/vz" ]; then
-echo -e "\033[41;37m WARNING: \033[0m Your VPS is based on OpenVZ, and IPSec might not be supported by the kernel."
-echo "Continue installation? (y/n)"
-read -p "(Default: n)" agree
-[ -z ${agree} ] && agree="n"
-if [ "${agree}" == "n" ]; then
-echo
-echo "ipsec installation cancelled."
-echo
-exit 0
-fi
-fi
-echo"please enter liftip:"
 read -p "(eth0ip:):"liftip
-[ -z ${LIFTIP} ] 
+echo"lift:$LIFTIP"
 
-echo"please enter PSK:"
 read -p "(PSK:hello123):"PSK
-[ -z ${PSK} ] && PSK="hello123"
+echo"PSK:$PSK"
 
-echo"please enter RIGHTIP:"
 read -p "(RIGHTIP:):"RIGHTIP
-[ -z ${RIGHTIP} ] 
+echo"right:$RIGHTIP"
 
-echo"please enter RIGHTID:"
 read -p "(RIGHTID:@fgt):"RIGHTID
-[ -z ${RIGHTID} ] && RIGHTI="@fgt"
+echo"rightid:$RIGHTID"
 
-echo"please enter rightsubnet:"
 read -p "(rightsubnet:):"rightsubnet
-[ -z ${rightsubnet} ]
-
-echo"lift:${LIFTIP}"
-echo"PSK:${PSK}"
-echo"right:${RIGHTIP}"
-echo"rightid:${RIGHTID}"
-echo"rightsubnet:${rightsubnet}"
+echo"rightsubnet:$rightsubnet"
  echo
     echo "Press any key to start... or press Ctrl + C to cancel."
 }
