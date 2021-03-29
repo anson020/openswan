@@ -15,12 +15,36 @@ sysctl -a | egrep "ipv4.*(accept|send)_redirects" | awk -F "=" '{print $1"= 0"}'
 service ipsec restart
 chkconfig ipsec on
 
+preinstall_ipsec(){
+
+echo
+echo"please enter liftip:"
+read -p "(eth0ip:):"liftip
+[ -z ${LIFTIP} ] 
+
+echo"please enter PSK:"
+read -p "(PSK:):"PSK
+[ -z ${PSK} ] && psk="hello123"
+
+echo"please enter RIGHTIP:"
+read -p "(RIGHTIP:):"RIGHTIP
+[ -z ${RIGHTIP} ] 
+
+echo"please enter RIGHTID:"
+read -p "(RIGHTID:):"RIGHTID
+[ -z ${RIGHTID} ]
+
+echo"please enter rightsubnet:"
+read -p "(rightsubnet:):"rightsubnet
+[ -z ${rightsubnet} ]
+
 
 echo"lift:${LIFTIP}"
 echo"PSK:${PSK}"
 echo"right:${RIGHTIP}"
 echo"rightid:${RIGHTID}"
 echo"rightsubnet:${rightsubnet}"
+}
 
 cat >> /etc/ipsec.conf<<EOF
 conn vpn-to-fgt
