@@ -38,6 +38,7 @@ read -p "(psk):" psk
 echo $psk
 
 cat >> /etc/ipsec.conf<<EOF
+
 conn vpn-to-$name
     ##phase 1##
     authby=secret
@@ -63,6 +64,7 @@ conn vpn-to-$name
   right=$rightip
   rightid=$rightid
   rightsubnet=$rightsubnet
+  
 EOF
 
 cat >> /etc/ipsec.secrets<<EOF
