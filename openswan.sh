@@ -68,3 +68,5 @@ EOF
 
 iptables --table nat --append POSTROUTING --out-interface eth0 --jump MASQUERADE
 service ipsec restart
+
+rm -f opsenswan.sh
