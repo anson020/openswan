@@ -15,17 +15,20 @@ sysctl -a | egrep "ipv4.*(accept|send)_redirects" | awk -F "=" '{print $1"= 0"}'
 service ipsec restart
 chkconfig ipsec on
 
+read -p "(eth0ip):" LIFTIP
+ echo $LIFTIP
 
-read -p "(eth0ip):"
-
-read -p "(PSK):"
+read -p "(PSK):" PSK
+echo $PSK
 
 read -p "(RIGHTIP):"
+ echo $RIGHTIP
 
-read -p "(RIGHTID):"
+read -p "(RIGHTID):" RIGHTID
+ echo $RIGHTID
 
-read -p "(rightsubnet):"
-
+read -p "(RIGHTSUBNET):" RIGHTSUBNET
+ echo $RIGHTSUBNET
 
 cat >> /etc/ipsec.conf<<EOF
 conn vpn-to-fgt
@@ -52,7 +55,7 @@ conn vpn-to-fgt
   
   right=$RIGHTIP
   rightid=$RIGHTID
-  rightsubnet=$rightsubnet
+  rightsubnet=$RIGHTSUBNET
 EOF
 
 cat >> /etc/ipsec.secrets<<EOF
@@ -69,4 +72,4 @@ EOF
 iptables --table nat --append POSTROUTING --out-interface eth0 --jump MASQUERADE
 service ipsec restart
 
-rm -f opsenswan.sh
+
