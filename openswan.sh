@@ -55,6 +55,8 @@ echo"PSK:${PSK}"
 echo"right:${RIGHTIP}"
 echo"rightid:${RIGHTID}"
 echo"rightsubnet:${rightsubnet}"
+ echo
+    echo "Press any key to start... or press Ctrl + C to cancel."
 }
 
 cat >> /etc/ipsec.conf<<EOF
