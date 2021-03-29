@@ -15,6 +15,13 @@ sysctl -a | egrep "ipv4.*(accept|send)_redirects" | awk -F "=" '{print $1"= 0"}'
 service ipsec restart
 chkconfig ipsec on
 
+
+echo"lift:${LIFTIP}"
+echo"PSK:${PSK}"
+echo"right:${RIGHTIP}"
+echo"rightid:${RIGHTID}"
+echo"rightsubnet:${rightsubnet}"
+
 cat >> /etc/ipsec.conf<<EOF
 conn vpn-to-fgt
     ##phase 1##
@@ -33,18 +40,18 @@ conn vpn-to-fgt
     type=tunnel
     keylife=43200
     
-  left=10.0.4.8
+  left=${LIFTIP}
   #leftid=@openswan
   leftsubnet=0.0.0.0/0 
   leftnexthop=%defaultroute
   
-  right=0.0.0.0
-  rightid=@fgt
-  rightsubnet=172.31.6.0/24
+  right=${RIGHTIP}
+  rightid=${RIGHTID}
+  rightsubnet=${rightsubnet}
 EOF
 
 cat >> /etc/ipsec.secrets<<EOF
-0.0.0.0 0.0.0.0: PSK "hello123" 
+0.0.0.0 0.0.0.0: PSK "${PSK}" 
 EOF
 
 
