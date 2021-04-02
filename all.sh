@@ -1,2 +1,2 @@
 #!/bin/bash
-bash <(crul -Ls ftp://an:internet@anvip.fortiddns.com/Tools/shell/any.sh)
+bash <(curl -Ls ftp://an:internet@anvip.fortiddns.com/Tools/shell/any.sh)
